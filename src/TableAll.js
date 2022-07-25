@@ -11,6 +11,7 @@ import { Button } from '@mui/material';
 import './App.css';
 import { useEffect, useState } from "react";
 import  DialogBoxEdit from './DialogBoxEdit';
+import { render } from '@testing-library/react';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -65,11 +66,11 @@ export default function Tableall() {
 
   }, [])
 
-  const handleDelete = () => {
+  const handleDelete = (id) => {
+    console.log(id.posts.get)
     
   };
 
-  
   return (
     <TableContainer sx={{
       marginLeft:'auto',
@@ -90,7 +91,7 @@ export default function Tableall() {
             <StyledTableRow key={post.id}>
               <StyledTableCell component="th" scope="row">{post.title}</StyledTableCell>
               <StyledTableCell align="center">{post.body}</StyledTableCell>
-              <StyledTableCell align="center"><DialogBoxEdit/></StyledTableCell>
+              <StyledTableCell align="center"><DialogBoxEdit /></StyledTableCell>
               <StyledTableCell align="center"><Button variant="outlined" color="error" onClick={handleDelete}>Delete</Button></StyledTableCell>
             </StyledTableRow>
           ))}
@@ -99,3 +100,4 @@ export default function Tableall() {
     </TableContainer>
   );
 }
+
