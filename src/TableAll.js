@@ -11,7 +11,8 @@ import { Button } from '@mui/material';
 import './App.css';
 import { useEffect, useState } from "react";
 import  DialogBoxEdit from './DialogBoxEdit';
-import { render } from '@testing-library/react';
+import DialogBoxAddPost from './DialogBoxAddPost';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,35 +41,31 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function Tableall() {
   const [posts, setPosts] = useState([])
 
-  const [selectedRow,setSelectedRow]=useState([]);
   const fetchData = () => {
 
-    fetch("https://jsonplaceholder.typicode.com/posts")
-
-      .then(response => {
+    fetch("https://jsonplaceholder.typicode.com/posts").then(response => {
 
         return response.json()
 
       })
 
-      .then(data => {
+      .then((data) => {
+        setPosts(data.slice(0, 6));
+      });
 
-        setPosts(data)
-
-      })
-
-  }
+  };
 
 
   useEffect(() => {
 
     fetchData()
 
-  }, [])
+  }, []);
 
-  const handleDelete = () => {
-    
-    
+  const handleDelete = (postIndex) => {
+    setPosts((prevPosts) =>
+      prevPosts.filter((_, index) => index !== postIndex)
+    );
   };
 
   return (
@@ -87,12 +84,12 @@ export default function Tableall() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {posts.slice(0,6).map((post) => (
+          {posts.map((post,postIndex) => (
             <StyledTableRow key={post.id}>
               <StyledTableCell component="th" scope="row">{post.title}</StyledTableCell>
               <StyledTableCell align="center">{post.body}</StyledTableCell>
               <StyledTableCell align="center"><DialogBoxEdit dataParent1={post.title} dataParent2={post.body} /></StyledTableCell>
-              <StyledTableCell align="center"><Button variant="outlined" color="error" onClick={() => handleDelete(post)}>Delete</Button></StyledTableCell>
+              <StyledTableCell align="center"><Button variant="outlined" color="error" onClick={() => handleDelete(postIndex)}>Delete</Button></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -100,4 +97,3 @@ export default function Tableall() {
     </TableContainer>
   );
 }
-
