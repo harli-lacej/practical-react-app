@@ -40,7 +40,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function Tableall() {
   const [posts, setPosts] = useState([])
 
-
+  const [selectedRow,setSelectedRow]=useState([]);
   const fetchData = () => {
 
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -66,8 +66,8 @@ export default function Tableall() {
 
   }, [])
 
-  const handleDelete = (id) => {
-    console.log(id.posts.get)
+  const handleDelete = () => {
+    
     
   };
 
@@ -91,8 +91,8 @@ export default function Tableall() {
             <StyledTableRow key={post.id}>
               <StyledTableCell component="th" scope="row">{post.title}</StyledTableCell>
               <StyledTableCell align="center">{post.body}</StyledTableCell>
-              <StyledTableCell align="center"><DialogBoxEdit /></StyledTableCell>
-              <StyledTableCell align="center"><Button variant="outlined" color="error" onClick={handleDelete}>Delete</Button></StyledTableCell>
+              <StyledTableCell align="center"><DialogBoxEdit dataParent1={post.title} dataParent2={post.body} /></StyledTableCell>
+              <StyledTableCell align="center"><Button variant="outlined" color="error" onClick={() => handleDelete(post)}>Delete</Button></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

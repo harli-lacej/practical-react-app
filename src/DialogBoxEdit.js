@@ -11,7 +11,7 @@ import Table from './TableAll';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 
-export default function ResponsiveDialog() {
+export default function ResponsiveDialog({dataParent1,dataParent2}) {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
@@ -44,11 +44,11 @@ export default function ResponsiveDialog() {
           <DialogContentText>
             Title
           </DialogContentText>
-          <TextField id="outlined-basic" defaultValue="Ta gjej si behet" label="Title" variant="outlined" />
+          <TextField id="outlined-basic" defaultValue={dataParent1} style = {{width: 500}} variant="outlined" />
           <DialogContentText>
             Description
           </DialogContentText>
-          <TextField id="outlined-basic" multiline rows={4} defaultValue="Ta gjej si behet"  label="Description" variant="outlined" />
+          <TextField id="outlined-basic" multiline rows={4} defaultValue={dataParent2}  style = {{width: 500}} variant="outlined" />
         </DialogContent>
         <DialogActions>
           <Button autoFocus variant="outlined" color='error' onClick={handleClose}>

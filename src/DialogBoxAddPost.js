@@ -44,11 +44,11 @@ export default function ResponsiveDialog() {
           <DialogContentText>
             Title
           </DialogContentText>
-          <TextField id="outlined-basic" label="Title" variant="outlined" />
+          <TextField id="outlined-basic" label="Title" variant="outlined" style = {{width: 500}} />
           <DialogContentText>
             Description
           </DialogContentText>
-          <TextField id="outlined-basic" multiline rows={4} label="Description" variant="outlined" />
+          <TextField id="outlined-basic" multiline rows={4} label="Description" variant="outlined" style = {{width: 500}} />
           
         </DialogContent>
         <DialogActions>
