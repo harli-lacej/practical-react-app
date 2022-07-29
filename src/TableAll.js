@@ -12,6 +12,7 @@ import './App.css';
 import { useEffect, useState } from "react";
 import  DialogBoxEdit from './DialogBoxEdit';
 import DialogBoxAddPost from './DialogBoxAddPost';
+import useResponsiveDialog from './DialogBoxAddPost';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -38,8 +39,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-export default function Tableall() {
+export default function Tableall({message1,message2}) {
   const [posts, setPosts] = useState([])
+  console.log({message1},{message2});
 
   const fetchData = () => {
 
@@ -61,13 +63,13 @@ export default function Tableall() {
     fetchData()
 
   }, []);
-
+  
   const handleDelete = (postIndex) => {
     setPosts((prevPosts) =>
       prevPosts.filter((_, index) => index !== postIndex)
     );
   };
-
+  
   return (
     <TableContainer sx={{
       marginLeft:'auto',
@@ -88,11 +90,25 @@ export default function Tableall() {
             <StyledTableRow key={post.id}>
               <StyledTableCell component="th" scope="row">{post.title}</StyledTableCell>
               <StyledTableCell align="center">{post.body}</StyledTableCell>
-              <StyledTableCell align="center"><DialogBoxEdit dataParent1={post.title} dataParent2={post.body} /></StyledTableCell>
+              <StyledTableCell align="center">
+            <DialogBoxEdit
+
+            dataParent1={post.title}
+
+            dataParent2={post.body}
+
+            postIndex={postIndex}
+
+            onSaveChanges={setPosts}
+
+            />
+
+            </StyledTableCell>
               <StyledTableCell align="center"><Button variant="outlined" color="error" onClick={() => handleDelete(postIndex)}>Delete</Button></StyledTableCell>
             </StyledTableRow>
-          ))}
-        </TableBody>
+            ))}
+            
+                    </TableBody>
       </Table>
     </TableContainer>
   );

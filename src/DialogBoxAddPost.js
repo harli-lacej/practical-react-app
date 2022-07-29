@@ -7,7 +7,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import Table from './TableAll';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import {useState} from 'react';
@@ -25,7 +24,7 @@ export default function ResponsiveDialog() {
     setOpen(false);
   };
 
-  const [message, setMessage] = useState('');
+  const [message1, setMessage] = useState('');
   const [message2, setMessage2] = useState('');
   const handleChange = event => {
     setMessage(event.target.value);
@@ -59,7 +58,7 @@ export default function ResponsiveDialog() {
           <DialogContentText>
             Title
           </DialogContentText>
-          <TextField id="outlined-basic" onChange={handleChange} value={message} name="message" label="Title" variant="outlined" style = {{width: 500}} />
+          <TextField id="outlined-basic" onChange={handleChange} value={message1} name="message" label="Title" variant="outlined" style = {{width: 500}} />
           <DialogContentText>
             Description
           </DialogContentText>
