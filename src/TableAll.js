@@ -63,6 +63,12 @@ export default function Tableall({message1,message2}) {
     fetchData()
 
   }, []);
+  const handleSave = React.useCallback((title, body) => {
+    setPosts((prev) => [
+      ...prev,
+      { userId: 123, title, body, id: prev.length }
+    ]);
+  }, []);
   
   const handleDelete = (postIndex) => {
     setPosts((prevPosts) =>
@@ -81,8 +87,8 @@ export default function Tableall({message1,message2}) {
           <TableRow>
             <StyledTableCell sx={{width:250}}>Title</StyledTableCell>
             <StyledTableCell align="center" sx={{width:500}}>Description</StyledTableCell>
-            <StyledTableCell align="center" sx={{width:100}}></StyledTableCell>
-            <StyledTableCell align="center"sx={{width:100}}></StyledTableCell>
+            <StyledTableCell align="center" sx={{width:150}}></StyledTableCell>
+            <StyledTableCell align="center"sx={{width:150}}><DialogBoxAddPost onSave={handleSave}/></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -91,25 +97,16 @@ export default function Tableall({message1,message2}) {
               <StyledTableCell component="th" scope="row">{post.title}</StyledTableCell>
               <StyledTableCell align="center">{post.body}</StyledTableCell>
               <StyledTableCell align="center">
-            <DialogBoxEdit
-
-            dataParent1={post.title}
-
-            dataParent2={post.body}
-
-            postIndex={postIndex}
-
-            onSaveChanges={setPosts}
-
-            />
-
+                <DialogBoxEdit dataParent1={post.title} dataParent2={post.body} postIndex={postIndex} onSaveChanges={setPosts}/>
             </StyledTableCell>
               <StyledTableCell align="center"><Button variant="outlined" color="error" onClick={() => handleDelete(postIndex)}>Delete</Button></StyledTableCell>
             </StyledTableRow>
             ))}
             
-                    </TableBody>
+        </TableBody>
       </Table>
+      
     </TableContainer>
+    
   );
 }
